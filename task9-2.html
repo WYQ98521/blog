@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    div{
+      background-color:#f1f1f1;
+      width:600px;
+      margin:0 auto;
+    }
+    ul{
+      padding:0;
+      list-style-type:none;
+      
+     }
+    li{
+      float:left;
+      position:relative;
+     
+    }
+    .one::after{
+      content:'';
+      display:block;
+      clear:both;
+    }
+    .one li a{
+      text-decoration:none;
+      display:block;
+      padding:8px 16px;
+      color:#000;
+      
+    }
+    li a:hover{
+      background-color:#ccc;
+    }
+    .one{
+      box-shadow:0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+    .one .two {
+            color: #000;
+            background-color: #fff;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            max-width:160px;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+    }
+    .one>li:hover .two{
+      display:block;
+      
+    }
+  </style>
+</head>
+<body>
+  <div>
+<ul class="one">
+  <li><a href="#">首页</a></li>
+  <li><a href="#">作品</a></li>
+  <li><a href="#">更多</a>
+  <div class="two">
+    <a href="#">Github</a>
+    <a href="#">博客</a>
+    <a href="#">知乎</a>
+  </div>
+  </li>
+ 
+</ul>
+  </div>
+</body>
+</html>
