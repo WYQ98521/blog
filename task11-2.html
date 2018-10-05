@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.aside{
+			float: left;
+			width: 200px;
+			height: 400px;
+			background-color: red;
+		}
+		.main{
+			margin-left: 210px;
+			height: 500px;
+			background-color: blue;
+			margin-right: 210px; 
+		}
+		.abc{
+			float: right;
+			height: 400px;
+			width: 200px;
+            background-color: pink;
+		}
+		.content:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+		
+			
+		
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div class="aside"></div>
+		<div class="abc"></div>
+		<div class="main"></div>
+	
+	</div>
+	
+</body>
+</html>
