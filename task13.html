@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Game</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_880007_qdewnvufew.css
+">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+        }
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .button {
+            font-size: 18px;
+            color: #fff;
+            background-color: #939393;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0.85;
+            margin-top: 10px;
+        }
+        .button:hover {
+            opacity: 1;
+        }
+        body{
+            font: 14px/1.5 Arial;
+            color: #444;
+            height: 100%;
+            background: #fff;
+        }   
+        header::before {
+            content: '';
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.2);
+            display: block;
+            position: absolute;
+            z-index: 1;
+        }
+        header {
+            height: 100%;
+            min-height: 600px;
+            background: #000 url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539879725385&di=9fa1b4e147971b03546a4e03fb796107&imgtype=0&src=http%3A%2F%2Fdnf.tgbus.com%2FUploadFiles%2F201405%2F2014052821393990.jpg) center center no-repeat;
+            background-size: cover;
+            background-color: black;
+            position: relative;
+        }
+        header .logo {
+            color: #f7ba3e; 
+            font-size: 32px;
+            float: left;
+            margin-top: 20px;
+            margin-left: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        header .nav {
+            float:  right;
+
+        }
+        header .nav>li {
+            float: left;
+            margin: 12px;
+            
+        }
+        header .nav a {
+            display: inline-block;
+            color: #fff;
+            font-size: 16px;
+            padding: 5px;
+        }
+        header .nav li:hover {
+            background-color: #939393;
+            border-radius: 5px;
+        }
+        .layout {
+            width: 900px;
+            margin: 0 auto;
+        }
+        header .introduction {
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        header .introduction h1 {
+            font-size: 32px;
+        }
+        header .introduction h2 {
+            font-size: 46px;
+            margin-top: 20px;
+        }
+        .zindex {
+            position: relative;
+            z-index: 999;
+        }
+        main {
+            height: 100%;
+            min-height: 600px;
+            background: #fff;
+        }
+        main .layout {
+            margin-top: 100px;
+        }
+        section {
+            margin-top: 100px;
+            text-align: center; 
+        }
+        section ul {
+            margin-top: 50px;
+        }
+        section .services > li {
+            float: left;
+            width: 33.3%;
+        }
+        section > h2 {
+            font-size: 40px;
+        }
+        section > p {
+            margin-top: 10px;
+        }
+        section  .Portfolio > li {
+            float: left;
+            width: 33.3%;
+            padding: 10px 20px;
+        }
+        main section ul {
+            margin: 0 100px;
+        }
+        section > ul .iconfont {
+            font-size: 60px;
+            border: 3px solid #f7ba3e;
+            border-radius: 20px;
+        }
+        section > ul p {
+            margin-top: 10px;
+        }
+        .part2 {
+            background: #dfdfdf;
+            width: 100%;
+            padding-top: 50px;
+            min-height: 700px;
+        }
+        .webdesign {
+            margin-top: 30px;
+            padding-bottom: 100px;
+        }
+        .webdesign ul img {
+            width: 100%;
+            height: 220px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .webdesign ul a:hover::before {
+            content: '+';
+            color: #fff;
+            font-size: 150px;
+            width: calc(33.3% - 106px);
+            display: inline-block;
+            background: #feb136;
+            opacity: 0.8;
+            position: absolute;
+            height: 220px;      
+            z-index: 999;
+        } 
+        section .timeline > li::after{
+            content: '';
+            display: block;
+            clear: both;
+           
+        }
+        section .timeline .detail {
+            margin-right: 120px;
+        }
+        section .timeline li .img {
+           display: inline-block;
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           border: 3px solid lightblue;   
+           text-align: center;
+           padding-top:20px;
+           font-size: 16px;  
+           background: #feb136;
+        }
+        section .timeline li img {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           border: 3px solid lightblue;   
+        }
+        section .timeline li h2 {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           border: 3px solid lightblue;   
+           text-align: center;
+           font-size: 22px;
+           vertical-align: middle;
+        }
+        section .timeline > li {
+            margin-top: 50px; 
+            position: relative;
+        }
+        section .timeline > li:nth-child(even) {           
+            text-align: right;
+            padding-right: calc(50% - 50px);
+            
+        }
+        section .timeline > li:nth-child(even) img {
+            float: right;
+        }
+        section .timeline > li:nth-child(even) .detail {
+            margin-right: 120px;
+            margin-left: 60px;
+        }
+        section .timeline > li:nth-child(odd) img {
+            float: left;
+
+        }
+        section .timeline > li:nth-child(odd) {
+            padding-left: calc(50% - 50px);
+            text-align: left;
+        }
+        section .timeline > li:nth-child(odd) .detail {
+            margin-right: 60px;
+            margin-left: 120px; 
+        }
+        section .timeline > li::before {
+            content: '';
+            display: inline-block;
+            height: 74px;
+            width: 4px;
+            background-color: lightblue;
+            position: absolute; 
+            top: 97px;
+            left: 50%;
+        }
+        section .timeline > li:last-child::before {
+            height: 0;
+        }
+        section .team li p {
+            color: grey;
+            margin-top: 8px; 
+        }
+        section .foot {
+            color: grey;
+            margin-top: 80px;
+            
+          }
+        section .team li img {
+            width: 200px;
+            height: 200px;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            
+        }
+        section .team li {
+            width: 33.3%;
+            float: left;
+        }
+        section .team li::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        section .team li a span {
+            border: none;
+            font-size: 40px;
+            margin-right: 8px; 
+        }
+        .contact {
+            color: #000;
+            background: #000 url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540651835941&di=4705724b085461eb94032ce8f498f19a&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140428%2F8175703_211731008350_2.jpg) center center no-repeat;
+            background-size: cover;
+            margin-top: 0;
+        }
+        
+        .contact input,textarea {
+            border: 5px solid #feb136;
+            border-radius: 5px;
+            height: 50px; 
+            display: block;
+            width: 350px;           
+        }
+        .contact .shuru {
+            width: 800px;
+            margin: 80px auto;            
+            position: relative;
+
+        }
+        .contact .inp1 input {
+          margin-bottom:  20px; 
+        }
+        .contact .text textarea {
+            width: 400px;
+            height: 190px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .end {
+            margin: 0;
+            height: 80px;
+            position: relative; 
+        }     
+        .end div {
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .end div > span{
+            margin-right: 30px;  
+        }
+        .end div a span {
+            font-size: 30px; 
+            margin-right: 10px; 
+        }
+        .end div > a:last-child {
+            margin-left: 30px; 
+            color: #feb136;
+        }
+        .end div > a:last-child:hover {
+            text-decoration: underline;
+        }
+
+       </style>
+</head>
+<body>
+    <header>
+        <div class="navbar clearfix layout">
+        <a href="#" class="logo">Game of XXX</a>
+        <ul class="nav zindex">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Family</a></li>
+            <li><a href="#">Character</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+       </div>
+        <div class="introduction layout zindex">
+            <h1>New Apostles is comming,</h1>
+            <h2>A new battle is comming for us.</h2>
+            <a href="#" class="button">Tell me more</a>
+        </div>
+    </header>
+    <main>
+        <section class="layout">            
+            <h2>Services</h2>
+            <p>Here's what you want to get.</p>
+            <ul class="clearfix layout services">
+                <li>
+                    <span class="iconfont icon-download"></span>
+                    <h3>Download</h3>
+                    <p>Download the game's complete client, version patch and auxiliary tools.</p>
+                </li>
+                <li>
+                    <span class="iconfont icon-bangzhu"></span>
+                    <h3>Help</h3>
+                    <p>Provide you with information and information you want to know.</p>
+                </li>
+                <li>
+                    <span class="iconfont icon-huodong"></span>
+                    <h3>Activities</h3>
+                    <p>The latest and hottest activities are here.</p>
+                </li>
+            </ul>
+        </section>
+        <section class="part2">
+            <h2>PORTFOLIO</h2>
+            <p><i>Lorem ipsum dolor sit amet consectetur.</i></p>
+            <div class="webdesign">
+                <ul class="clearfix Portfolio">
+                    <li>
+                <a href="#"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3499269080,3836119499&fm=26&gp=0.jpg" alt=""></a>
+                <figcaption>Round Icons</figcaption>
+                <span><i>Graphic Design</i></span>
+                    </li>
+                    <li>
+                <a href="#"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3212208822,2643301765&fm=26&gp=0.jpg" alt=""></a>
+                <figcaption>Startup Framework</figcaption>
+                <span><i>Website Desgin</i></span>
+                    </li>
+                    <li>
+                <a href="#"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539890273503&di=86202916716e9f578674b794f1fd133f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0150ed55421f290000019ae93863be.jpg%401280w_1l_2o_100sh.jpg" alt=""></a>
+                <figcaption>Treehouse</figcaption>
+                <span><i>Website Design</i></span>
+                    </li>
+                    <li>
+                <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=107101842,3539172122&fm=26&gp=0.jpg" alt=""></a>
+                <figcaption>Golden</figcaption>
+                <span><i>Website Design</i></span>
+                     </li>
+                     <li>
+                <a href="#"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4052534198,1215385991&fm=26&gp=0.jpg" alt=""></a>
+                <figcaption>Escape</figcaption>
+                <span><i>Website Design</i></span>
+                     </li>
+                     <li>
+                <a href="#"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2214797118,3096646264&fm=26&gp=0.jpg" alt=""></a>
+                <figcaption>Dreams</figcaption>
+                <span><i>Website Design</i></span>
+                     </li>
+            </ul>
+            </div>
+        </section>
+        <section class="part3">
+        <h2>About</h2>
+        <p><i>Lorem ipsum dolor sit amet consectetur.</i></p>
+        <ul class="timeline">
+            <li> <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540317036179&di=b1529d95e4fd5ea240a325bdf8b3e346&imgtype=0&src=http%3A%2F%2F09imgmini.eastday.com%2Fmobile%2F20180915%2F20180915124528_65aff33096b051290e4acb8aa78f5fb8_4_mwpm_03201609.jpg" alt="">
+            <div class="detail">
+            <h3>2008-2011</h3>
+            <h4>Our Humble Beginnings</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+            </div>
+            </li>
+            <li>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540317578281&di=2895408a0539e0c6977d9121deb0e356&imgtype=0&src=http%3A%2F%2Fimg.9553.com%2Fuploadfile%2F2018%2F0910%2F20180910052523996.jpg" alt="">
+            <div class="detail">
+            <h3>May 2011</h3>
+            <h4>An Agency is Born</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+            </div>
+            </li>
+            <li>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540317578281&di=aa6eefa97558e0ce7a3310b16260fdb5&imgtype=0&src=http%3A%2F%2Fimages.17173.com%2F2015%2Fdnf%2F2015%2F08%2F13%2F20150813154127401.jpg" alt="">
+            <div class="detail">
+            <h3>December 2012</h3>
+            <h4>Transition to Full Service</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+            </div>
+            </li>
+            <li>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540317578275&di=1082ded30306af39c9e3bb4ae80cb7e7&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01c7f959264151b5b3086ed44a0cf9.jpg%401280w_1l_2o_100sh.png" alt="">
+            <div class="detail">
+            <h3>July 2014</h3>
+            <h4>Phase Two Expansion</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+            </div>
+            </li>
+            <li>
+            <span class="img">Be part of our story!</span>
+            </li>
+        </ul>
+        </section>
+    </main>
+    <footer>
+     <section class="part2">
+      <h2>Our Amazing Team</h2>
+      <p><i>Lorem ipsum dolor sit amet consectetur.</i></p>
+      <ul class="team clearfix">
+          <li>
+              <img src="http://pic.58pic.com/58pic/13/78/57/44w58PICpJF_1024.jpg" alt="">
+              <h3>Diana Pertersen</h3>
+              <p>Lead Developer</p>
+              <a href="#"><span class="iconfont icon-tianjia"></span></a>
+              <a href="#"><span class="iconfont icon-xinfeng"></span></a>
+              <a href="#"><span class="iconfont icon-dianhua"></span></a>
+          </li>
+          <li>
+              <img src="http://img.zcool.cn/community/01772b5540ff19000001e71b1db5c0.jpg@1280w_1l_2o_100sh.jpg" alt="">
+              <h3>Kay Garland</h3>
+              <p>Lead Designer</p>
+              <a href="#"><span class="iconfont icon-tianjia"></span></a>
+              <a href="#"><span class="iconfont icon-xinfeng"></span></a>
+              <a href="#"><span class="iconfont icon-dianhua"></span></a>
+          </li>
+          <li>
+              <img src="http://img2.imgtn.bdimg.com/it/u=197648995,755745283&fm=26&gp=0.jpg" alt="">
+              <h3>Larry Parker</h3>
+              <p>Lead Marketer</p>
+              <a href="#"><span class="iconfont icon-tianjia"></span></a>
+              <a href="#"><span class="iconfont icon-xinfeng"></span></a>
+              <a href="#"><span class="iconfont icon-dianhua"></span></a>
+          </li>
+      </ul>
+      <p class="foot">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+     </section>
+     <section class="part2 contact">
+      <h2>Contact Us</h2>
+      <p>Lorem ipsum dolor sit amet consectetur.</p>
+      
+      <div class="shuru clearfix">
+      <form action="">
+       <div class="inp1">
+       <input type="text" placeholder="Your Name*">
+       <input type="text" placeholder="Your Email*">
+       <input type="text" placeholder="Your Phone*">
+       </div>
+       <div class="text">
+       <textarea name="" id="" cols="30" rows="10" placeholder="Your Message*"></textarea>
+       </div>
+      </form>
+      </div>
+      <a href="#" class="button">Send Message</a>
+     </section>
+     <section class="end">
+     <div>
+     <span>Copyright&copy;Your Website 2014</span>
+     <a href="#"><span class="iconfont icon-tianjia"></span></a>
+     <a href="#"><span class="iconfont icon-xinfeng"></span></a>
+     <a href="#"><span class="iconfont icon-dianhua"></span></a>
+     <a href="#">Privacy Policy  Terms of Use</a>
+     </div>
+     </section>
+    </footer>
+</body>
+</html>
