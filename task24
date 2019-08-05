@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+<style>
+.box{
+  padding: 20px;
+  border: 1px solid black;
+}
+.box.active {
+  background: purple;
+  color: yellow;
+}
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>hello</h1>
+    <p>jirengu</p>
+  </div>
+  <button id="add">add</button>
+  <button id="remove">remove</button>
+  <button id="toggle1">toggle1</button>
+  <button id="toggle2">toggle2</button>
+<script>
+var addBtn = document.querySelector('#add')
+var removeBtn = document.querySelector('#remove')
+var toggle1Btn = document.querySelector('#toggle1')
+var toggle2Btn = document.querySelector('#toggle2')
+var boxPanel = document.querySelector('.box')
+
+addBtn.onclick = function(){
+  boxPanel.classList.add('active')
+}
+
+removeBtn.onclick = function(){
+  boxPanel.classList.remove('active')
+}
+
+toggle1Btn.onclick = function(){
+  boxPanel.classList.toggle('active')
+}
+
+toggle2Btn.onclick = function(){
+  boxPanel.classList.toggle('active')
+}
+</script>
+
+</body>
+</html>
