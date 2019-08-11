@@ -34,7 +34,7 @@ btn.addEventListener('click',function(evt){
 })
 
 $('.container').addEventListener('click',function(e){
-  
+  e.stopPropagation()
   console.log('container click in 捕获阶段')
 },true)
 $('.box').addEventListener('click',function(e){
