@@ -14,7 +14,6 @@
 </head>
 <body>
 
-<button id="btn">click</button>
 <div class="container">
   container
   <div class="box">
@@ -27,11 +26,6 @@
 function $(selector){
   return document.querySelector(selector)
 }
-  
-var btn = $('#btn')
-btn.addEventListener('click',function(evt){
-  console.log(evt.target)
-})
 
 $('.container').addEventListener('click',function(e){
   console.log('container click in 捕获阶段')
