@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <title>JS Bin</title>
+     <style>
+        .box {
+            position: relative;   
+        }
+        .amt {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            position: absolute;
+            top: 100;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+       <button class="btn1">show</button>
+       <button class="btn2">hide</button>
+       <button class="btn3">slideUp</button>
+       <button class="btn4">slideDown</button>
+       <button class="btn5">slideToggle</button>
+       <button class="btn6">fadeIn</button>
+       <button class="btn7">fadeOut</button>
+       <button class="btn8">animate</button>
+       <div class="amt"></div>
+    </div>
+   <script>
+         $('.btn1').on('click',function(){
+             $('.amt').show(); 
+         })
+         
+          $('.btn2').on('click',function(){
+             $('.amt').hide(); 
+         })
+          $('.btn3').on('click',function(){
+             $('.amt').slideUp(); 
+
+         })
+          $('.btn4').on('click',function(){
+             $('.amt').slideDown(); 
+
+         })
+          $('.btn5').on('click',function(){
+             $('.amt').slideToggle(); 
+
+         })
+          $('.btn6').on('click',function(){
+             $('.amt').fadeIn(); 
+
+         })
+          $('.btn7').on('click',function(){
+             $('.amt').fadeOut(); 
+         })
+          $('.btn8').on('click',function(){
+            $('.amt').animate({
+                opacity: 0.5,
+                left: '+=30',
+                height: '300'
+            },1000,function(){
+                console.log("动画结束！")
+            })
+           }) 
+    </script>
+</body>
+</html>
