@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1416455_3f1r3edbfax.css">
+    <title>Github排行</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 12px;
+            line-height: 1.2;
+            background: #fff;
+            height: 100%;
+        }
+
+        main {
+            height: calc(100vh - 50px);
+        }
+
+        footer {
+         height: 50px;
+         width: 100%;
+         display: flex;      
+         border-top: 1px solid #ccc; 
+        }
+
+        footer>div {
+        flex: 1;
+        text-align: center;
+        }
+
+        footer>div>span {
+            display: block;
+            padding-top: 5px; 
+        }
+
+        footer .active {
+            color: #FF5722;
+        }
+
+        section {
+            display: none;
+        }
+
+        section:first-child {
+            display: block;
+        }
+
+        main {
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
+            height: calc(100vh - 45px);
+            padding: 10px;
+            background: #fff;
+        }
+        .item {
+            padding-left: 10px; 
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px; 
+        }
+
+        .order {
+            float: left;
+            background: green;
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            margin-top: 18px; 
+            padding-top: 2px; 
+        }
+
+        .detail {
+            margin-left:30px; 
+            margin-top: 5px;
+        }
+
+        .item::after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+            font-size: 12px; 
+        }
+
+        .extra {
+            color: #aaa;
+        }
+
+        .loading {
+            text-align: center;
+            padding-top: 10px; 
+            display: none;
+        }
+
+        .loading .iconfont {
+            display: inline-block;
+            animation: 1s rotate linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .auther {
+            padding-left: 10px; 
+            padding-bottom: 10px; 
+        }
+
+        .homer {
+            border-bottom: 1px solid #aaa;
+            padding: 10px;
+        }
+
+        .auther img {
+            width: 50px;
+            height: 50px;
+            float: left;
+        }
+
+        .homer::after{
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .homer .detail h2 {
+            margin-top: 15px;
+            margin-left: 30px;  
+        }
+
+        .search-area {
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+
+        .search-area input {
+            width: calc(100% - 50px);
+            padding: 8px;
+            background-color: #eee;
+            border: none;
+            border-radius: 2px;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .search-area .button {
+            position: absolute;
+            right: 0;
+            padding: 8px 10px;
+            background: #FF5722;
+            color: #fff;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+
+
+        
+
+
+    </style>
+</head>
+<body>
+    <main>
+        <section class="Top">
+            <div class="top30"></div>
+                <!-- <div class="item">
+                        <a href="https://github.com/freeCodeCamp/freeCodeCamp">
+                          <div class="order"><span>1</span></div>
+                          <div class="detail">
+                            <h2>freeCodeCamp</h2>
+                            <div class="description">The https://www.freeCodeCamp.org open source codebase and curriculum. Learn to code for free together with millions of people.</div>
+                            <div class="extra"><span class="star-count">304972</span> star</div>  
+                         </div>
+                       </a>
+                      </div> -->
+            <div class="loading"><span class="iconfont icon-xingzhuang"></span></div>
+        </section>
+        
+        <section class="use">
+            <div class="auther"></div>
+            <div class="loading"><span class="iconfont icon-xingzhuang"></span></div>
+        </section>
+        <section class="search">
+            <div class="wrap">
+              <div class="search-area">
+                <input type="text" placeholder="Search repos"><span class="button"> Search</span>
+              </div>
+                <div class="search-result">
+                <div class="container"></div>         
+              </div>        
+            </div>
+            <div class="loading"><span class="iconfont icon-xingzhuang"></span> </div>
+      
+        </section>
+    </main>
+    <footer>
+        <div class="active">
+            <span class="iconfont icon-bangdan"></span>
+            <span>Top250</span>
+        </div>
+        <div>
+            <span class="iconfont icon-beimei"></span>
+            <span>北美</span>
+        </div>
+        <div>
+            <span class="iconfont icon-search"></span>
+            <span>搜索</span>
+        </div>
+    </footer>
+</body>
+<script>
+     var Helper = {
+         isToBottom: function($con1,$con2){
+             return $con1.height() + $con1.scrollTop() + 5 > $con2.height()
+         }
+     }
+
+     var App = {
+         init: function(){
+             var _this = this
+             this.$tabs = $('footer>div')
+             this.$panels = $('section')
+             this.bind()
+             Top30.init()
+             TopUser.init()
+             Search.init()
+         },
+         bind: function(){
+             var _this = this
+             this.$tabs.on('click',function(){
+                 $(this).addClass('active').siblings().removeClass('active')
+                 _this.$panels.eq($(this).index()).fadeIn().siblings().hide()
+             })
+         }
+     }
+
+     
+
+     var Top30 = {
+         init: function(){
+             
+             this.isLoading = false
+             this.index = 1
+             this.count = 0
+             this.isFinish = false
+             this.$top30 = $('.Top')
+             this.$top300 = $('.top30')
+             this.bind()
+             this.start()
+         },
+
+         bind: function(){
+             var _this = this
+             
+             $('main').on('scroll.abc',function(){
+           
+                if(($('section').eq(0).height() - 10) <= ($('main').scrollTop() + $('main').height())){
+               _this.start()
+           } 
+     
+             })
+           
+         },
+
+         start: function(){
+             this.getData()
+         },
+
+         getData: function(){
+            var _this = this
+            if(_this.isLoading) return
+           _this.isLoading = true
+           $('.loading').show()
+       $.ajax({
+           url: 'https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc&page='+_this.index,
+           type: 'GET',
+           dataType: 'json'
+       }).done(function(ret){
+           
+           _this.creatNode(ret)
+           _this.count += 30
+           if(_this.count >= ret.total_count){
+               _this.isFinish = true
+           }
+           _this.index++
+           
+       }).fail(function(){      
+           console.log('error')
+       }).always(function(){
+           _this.isLoading = false
+           _this.$top30.children('.loading').hide()
+       })
+
+         },
+         creatNode: function(data){
+            var _this = this
+         data.items.forEach(function(article,index){
+            var  index = index + _this.count
+            var tql = `<div class="item">
+                        <a href="">
+                          <div class="order"><span></span></div>
+                          <div class="detail">
+                            <h2></h2>
+                            <div class="description"></div>
+                            <div class="extra"><span class="star-count">304972</span> star</div>  
+                         </div>
+                       </a>
+                      </div>`
+           var $node = $(tql)
+           $node.find('.description').text(article.description)
+           $node.find('.order>span').text(index+1)
+           $node.find('.detail>h2').text(article.name)
+           $node.find('.star-count').text(article.watchers)
+           $node.find('a').attr('href',article.html_url)
+           $('.top30').append($node)
+         });           
+         }
+         
+     }
+
+     var TopUser = {
+         init: function(){
+            
+             this.isLoading = false
+             this.index = 1
+             this.count = 0
+             this.isFinish = false
+             this.$top30 = $('.use')
+             this.$top300 = $('.auther')
+             this.bind()
+             this.start()
+         },
+         bind: function(){
+            var _this = this
+             
+             
+             $('main').on('scroll.cba',function(){
+           
+                if(($('section').eq(1).height() - 10) <= ($('main').scrollTop() + $('main').height())){
+               _this.start()
+           } 
+     
+             })
+           
+         },
+         start: function(){
+             this.getData()
+         },
+
+         getData: function(){
+            var _this = this
+            if(_this.isLoading) return
+           _this.isLoading = true
+           $('.loading').show()
+       $.ajax({
+           url: 'https://api.github.com/search/users?q=followers:>1000+language:javascript&page='+_this.index,
+           type: 'GET',
+           dataType: 'json'
+       }).done(function(ret){
+           console.log(ret)
+           _this.creatNode(ret)
+           _this.count += 30
+           if(_this.count >= ret.total_count){
+               _this.isFinish = true
+           }
+           _this.index++
+           
+       }).fail(function(){      
+           console.log('error')
+       }).always(function(){
+           _this.isLoading = false
+           _this.$top30.children('.loading').hide()
+       })
+
+         },
+         creatNode: function(data){
+            var _this = this
+         data.items.forEach(function(article,index){
+            var tql = `<div class="homer">
+          <a href="https://github.com/TryGhost/Ghost">
+            <div class="cover"><img src="" alt=""></div>
+            <div class="detail">
+            <h2>Ghost </h2>
+          </a>
+        </div> `
+           var $node = $(tql)
+           $node.find('.cover img').attr('src',article.avatar_url)
+           $node.find('.detail h2').text(article.login)
+           $node.find('a').attr('href',article.html_url)
+           $('.auther').append($node)
+         });           
+         }
+     }
+
+     var Search = {
+         init: function(){
+             this.$search = $('.search')
+             this.bind()
+             this.keyword = ''
+             this.isFinish = false
+             this.isLoading = false
+             this.index = 1
+             this.count = 0
+             $('.loading').hide()
+         },
+         bind: function(){
+             var _this = this
+             this.$search.find('.button').click(function(){
+                 _this.keyword=_this.$search.find('input').val()
+                 _this.start()
+                 $('.loading').show()
+             })
+
+
+             $('main').on('scroll.cba',function(){
+           
+           if(($('section').eq(2).height() - 10) <= ($('main').scrollTop() + $('main').height())){
+              _this.start()
+      } 
+
+        })
+         },
+         start: function(){
+             this.getData()
+         },
+         getData: function(){
+            var _this = this
+            if(_this.isLoading) return
+           _this.isLoading = true
+       $.ajax({
+           url: 'https://api.github.com/search/repositories?q='+_this.keyword+'+language:javascript&sort=stars&order=desc&page='+_this.index,
+           type: 'GET',
+           dataType: 'json'
+       }).done(function(ret){
+           console.log(ret)
+           _this.creatNode(ret)
+           _this.count += 30
+           if(_this.count >= ret.total_count){
+               _this.isFinish = true
+           }
+           _this.index++
+           
+       }).fail(function(){      
+           console.log('error')
+       }).always(function(){
+           _this.isLoading = false
+           _this.$search.children('.loading').hide()
+       })
+
+         },
+         creatNode: function(data){
+            var _this = this
+         data.items.forEach(function(article,index){
+            var  index = index + _this.count
+            var tql = `<div class="item">
+                        <a href="">
+                          <div class="order"><span></span></div>
+                          <div class="detail">
+                            <h2></h2>
+                            <div class="description"></div>
+                            <div class="extra"><span class="star-count">304972</span> star</div>  
+                         </div>
+                       </a>
+                      </div>`
+           var $node = $(tql)
+           $node.find('.description').text(article.description)
+           $node.find('.order>span').text(index+1)
+           $node.find('.detail>h2').text(article.name)
+           $node.find('.star-count').text(article.watchers)
+           $node.find('a').attr('href',article.html_url)
+           $('.search .container').append($node)
+         });           
+         }
+
+     }
+
+     App.init()
+
+
+</script>
+</html>
