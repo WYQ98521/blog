@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Document</title>
+    <style>
+        .load {
+            width: 650px;
+            margin: 10px auto;
+        }
+        img {
+            margin: 10px;
+            width: 200px;
+            height: 180px;
+        }
+    
+    </style>
+</head>
+<body>
+      <div class="load">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+    <img src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" alt="" data-src="http://pic51.nipic.com/file/20141025/8649940_220505558734_2.jpg">
+      </div>
+</body>
+
+<script>
+    var aaa = $(window).height()
+    var Top = $(window).scrollTop()
+     start()
+    $(window).on('scroll',function(){
+       aaa = $(window).height()
+       Top = $(window).scrollTop()
+     start()
+    })
+
+    function start(){
+        $('.load img').each(function(){
+            var $node = $(this)
+            if($node.offset().top <= aaa + Top){
+              $node.attr('src',$node.attr('data-src'))
+          }
+      })
+    }
+    
+
+
+
+</script>
+</html>
