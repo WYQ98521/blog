@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流局</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+    .waterfall {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .waterfall img{
+        width: 180px;
+        position: absolute;
+        margin: 5px;
+    }
+    </style>
+</head>
+<body>
+    <div class="waterfall">
+        <img style="height: 230px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569242788855&di=ed6aa1c2b14726b5558817b39c7d1e5a&imgtype=0&src=http%3A%2F%2Fpic26.nipic.com%2F20121221%2F9252150_142515375000_2.jpg" alt="">
+        <img style="height: 190px;" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2174909441,2495215020&fm=26&gp=0.jpg" alt="">
+        <img style="height: 170px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569243063180&di=e37a46213bf79ec2faa3bb62626cce00&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F14%2F29%2F47e58PICQUR_1024.jpg" alt="">
+        <img style="height: 200px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569243063175&di=c9b6beb0657d6c49fc93419b1a1baa25&imgtype=0&src=http%3A%2F%2Fpic26.nipic.com%2F20130121%2F9252150_101440518391_2.jpg" alt="">
+        <img style="height: 140px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569243063174&di=7030c2fde31b0f8377d74052aeb3905c&imgtype=0&src=http%3A%2F%2Fpic51.nipic.com%2Ffile%2F20141025%2F8649940_220505558734_2.jpg" alt="">
+        <img style="height: 160px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569243063173&di=a4d49cdee2eb20254734736e170c4944&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-fo3dSag_xI4khGko9WTAnF6hhy%2Flvpics%2Fw%3D600%2Fsign%3D1350023d79899e51788e391472a5d990%2Fb21bb051f819861810d03e4448ed2e738ad4e65f.jpg" alt="">
+        <img style="height: 130px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569242581093&di=05499dc8fc450b9fcfb77a3ecdc1b988&imgtype=0&src=http%3A%2F%2Fpic16.nipic.com%2F20111006%2F6239936_092702973000_2.jpg" alt="">
+    </div>
+    <script>
+
+    
+    var _waterfall = {
+        init:function(){
+            this.myArray = []
+            this.count = Math.floor($('.waterfall').width()/$('.waterfall img').outerWidth(true))
+            for(var i=0;i<this.count;i++){
+            this.myArray[i] = 0
+        }
+            this.bind()
+        },
+        bind:function(){
+            var _this = this
+            $('.waterfall img').on('load',function(){
+                _this.layout($(this))
+            })
+            $(window).on('resize',function(){
+                _this.count = Math.floor($('.waterfall').width()/$('.waterfall img').outerWidth(true))
+               for(var i=0;i<_this.count;i++){
+                _this.myArray[i] = 0
+            }
+                $('.waterfall img').each(function(){
+                    _this.layout($(this))
+                })
+            })
+        },
+        layout:function($node){    
+            var MinHeight = this.myArray[0]
+            var MinIndex = 0
+        for(var j=0;j<this.count;j++){
+            if(this.myArray[j] < MinHeight)
+            {
+                MinHeight = this.myArray[j]
+                MinIndex = j
+            }           
+        }
+            $node.css(
+                {
+                    left: MinIndex * $('.waterfall img').outerWidth(true),
+                    top: MinHeight
+                }
+            )
+            this.myArray[MinIndex] += $node.outerHeight(true) 
+
+        }
+    }
+    _waterfall.init()
+
+  
+
+    </script>
+</body>
+</html>
